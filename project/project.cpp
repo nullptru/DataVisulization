@@ -4,11 +4,15 @@ Project::Project(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	ui.setupUi(this);
+	//从数据库中读取甲醇时间和出罐价
+	query.exec("Select Date, TankPri from data");
 	setData();
 	timer = new QTimer(this);
 	connect(timer,SIGNAL(timeout()),ui.area2,SLOT(updateGL()));
 	connect(timer,SIGNAL(timeout()),ui.area3,SLOT(updateGL()));
-	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(readdata()));
+	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(ExponentialSmo()));
+	QObject::connect(ui.pushButton_3,SIGNAL(clicked()),this,SLOT(SeasonExp()));
+	QObject::connect(ui.pushButton_4,SIGNAL(clicked()),this,SLOT(BpNeuralNet()));
 	timer->start(10);
 }
 
@@ -26,12 +30,145 @@ void Project::setData()
 	labelData[0] = 100;
 	labelData[1] = 30;
 	labelData[2] = 50;
+	int kk=0;
+	query.first();
+	do 
+	{
+		QDate time = query.value(0).toDate();
+		int year = time.year();
+		int month = time.month();
+		time_methanol[kk].timess = getString(year)+getString(month);
+		meth_all[kk] = query.value(1).toDouble();
+		time_methanol[kk].methanol = meth_all[kk];
+		qDebug() << time_methanol[kk].timess<<meth_all[kk] ;
+		kk++;
+	} while (query.next());
+	len_methanol = kk;
+	//指数平滑法预测
+	Exponent();
+	//季节指数法
+	Season();
+	//bp神经网络
+	//BpNe();
+}
+void Project::Exponent()
+{
+	double a = 0.4;
+	int j = 0;
+	smo1[0] = (meth_all[0]+meth_all[1]+meth_all[2])/3;
+	smo3[0] = smo2[0] = smo1[0];
+	while (j<len_methanol)
+	{
+		smo1[j+1] = a * meth_all[j] + (1-a) * smo1[j];
+		smo2[j+1] = a * smo1[j+1] + (1-a) * smo2[j];
+		smo3[j+1] = a * smo2[j+1] + (1-a) * smo3[j];
+		j++;
+	}
+	double a1 = 3 *smo1[j] - 3 * smo2[j] + smo3[j];
+	double b1 = (a/(2*(1-a)*(1-a))) * ((6-5*a)*smo1[j]- 2*(5-4*a)*smo2[j]+(4-3*a)*smo3[j]);
+	double c1 = (a*a)/(2*(1-a)*(1-a))*(smo1[j]-2*smo2[j]+smo3[j]);
+	labeldataSmo[0] = a1+b1+c1;
+	labeldataSmo[1] = a1+2*b1+2*c1;
+	labeldataSmo[2] = a1+3*b1+3*c1;
 }
 
-void Project::readdata()
+void Project::Season()
+{
+	Time_methanol year_methanol[NN];
+	double aveall=0;
+	int numyear = len_methanol/12;
+	for (int i = 0;i<numyear ;i++)
+	{
+		int m = 12*i;
+		year_methanol[i].timess = time_methanol[m].timess.left(4);
+		double sum = 0;
+		for (int j = m;j< (m+12) ; j++)
+		{
+			sum += time_methanol[j].methanol;
+			aveall += time_methanol[j].methanol;
+		}
+		year_methanol[i].methanol =  sum;
+	}
+	aveall = aveall/(numyear*12);//计算所有年的平均数值
+	//year指数预测
+	double a = 0.3;
+	int k = 0;
+	double smo[NN];
+	smo[0]= (year_methanol[0].methanol+year_methanol[1].methanol+year_methanol[2].methanol)/3;
+	while (k<numyear)
+	{
+		smo[k+1]= a*year_methanol[k].methanol+(1-a)*smo[k];
+		k++;
+	}
+	double YuceYear = smo[k];
+	double YuceYear2 = a*year_methanol[k-1].methanol+(1-a)*smo[k];
+	//qDebug() <<numyear<< YuceYear ;
+	//季节预测
+	double smotha[12];
+	for (int k1 = 0;k1<12;k1++)
+	{
+		double avemouth = 0;
+		for (int k2 = k1;k2<len_methanol;)
+		{
+			avemouth +=time_methanol[k2].methanol;
+			k2+=12;	
+		}
+		avemouth = avemouth/numyear;
+		smotha[k1] = avemouth/aveall;
+	}
+	//输出预测的24个月的值
+	double monthForecast[24];
+	for (int k3=0 ; k3<12;k3++)
+	{
+		monthForecast[k3] = smotha[k3]*YuceYear/12;
+	}
+	double monthForecast1[12];
+	for (int k3=12; k3<24;k3++)
+	{
+		monthForecast[k3] = smotha[k3]*YuceYear2/12;
+	}
+	//输出
+	labeldataSeason[0]=monthForecast[len_methanol%12];
+	labeldataSeason[1]=monthForecast[len_methanol%12+1];
+	labeldataSeason[2]=monthForecast[len_methanol%12+2];
+
+}
+
+void Project::BpNe()
+{
+
+}
+
+QString Project::getString( int n )
+{
+	QString str = QString::number(n,10);
+	return str;
+
+
+}
+void Project::ExponentialSmo()
+{
+	labelData[0]=labeldataSmo[0];
+	labelData[1]=labeldataSmo[1];
+	labelData[2]=labeldataSmo[2];
+	WriteData();
+}
+
+void Project::SeasonExp()
+{
+	labelData[0]=labeldataSeason[0];
+	labelData[1]=labeldataSeason[1];
+	labelData[2]=labeldataSeason[2];
+	WriteData();
+}
+
+void Project::BpNeuralNet()
+{
+}
+
+void Project::WriteData()
 {
 	ui.label1_data->setText(QString::number(labelData[0]));
 	ui.label2_data->setText(QString::number(labelData[1]));
 	ui.label3_data->setText(QString::number(labelData[2]));
-
 }

@@ -6,8 +6,13 @@
 #include <QtGui/QMessageBox>
 #include <QTimer>
 #include "para.h"
+#include <QString.h>
 #include "sqlHelper.h"
-
+const int NN=100;
+struct Time_methanol{
+	QString timess;
+	double methanol;
+};
 class Project : public QMainWindow
 {
 	Q_OBJECT
@@ -17,11 +22,28 @@ public:
 	void setData();
 	QTimer *timer;
 	~Project();
-
+	void Exponent();
+	void Season();
+	void BpNe();
+	//预测值放的位置
+	double labeldataSmo[3];
+	double labeldataSeason[3];
+	double labedataBp[3];
 private:
 	Ui::ProjectClass ui;
+	QSqlQuery query;
+	double meth_all[NN];
+	Time_methanol time_methanol[NN];
+	double smo1[NN];
+	double smo2[NN];
+	double smo3[NN];
+	int len_methanol;
+	QString getString(int n);
+	void WriteData();
 public slots:
-	void readdata();
+	void ExponentialSmo();
+	void SeasonExp();
+	void BpNeuralNet();
 };
 
 #endif // PROJECT_H
