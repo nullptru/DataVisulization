@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'project.ui'
 **
-** Created: Fri Dec 5 16:44:12 2014
-**      by: Qt User Interface Compiler version 4.6.3
+** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -240,10 +239,10 @@ public:
         splitter->addWidget(groupBox3);
         area2 = new Area2(centralWidget);
         area2->setObjectName(QString::fromUtf8("area2"));
-        area2->setGeometry(QRect(730, 30, 391, 231));
+        area2->setGeometry(QRect(610, 30, 511, 181));
         area1 = new Area1(centralWidget);
         area1->setObjectName(QString::fromUtf8("area1"));
-        area1->setGeometry(QRect(310, 30, 391, 231));
+        area1->setGeometry(QRect(310, 30, 291, 181));
         splitter2 = new QSplitter(area1);
         splitter2->setObjectName(QString::fromUtf8("splitter2"));
         splitter2->setGeometry(QRect(40, 90, 144, 15));
@@ -285,10 +284,10 @@ public:
         splitter3->addWidget(label3_data);
         area3 = new Area3(centralWidget);
         area3->setObjectName(QString::fromUtf8("area3"));
-        area3->setGeometry(QRect(310, 290, 401, 311));
+        area3->setGeometry(QRect(310, 220, 291, 381));
         area4 = new Area4(centralWidget);
         area4->setObjectName(QString::fromUtf8("area4"));
-        area4->setGeometry(QRect(720, 290, 401, 311));
+        area4->setGeometry(QRect(610, 220, 511, 381));
         ProjectClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ProjectClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));

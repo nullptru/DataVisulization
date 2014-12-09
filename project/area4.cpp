@@ -4,15 +4,15 @@
 Area4::Area4(QWidget *parent)
 : QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
 {
-	draw = new int[NUMLINE];
-	int tmp[] = {KorKey, CFRTaiKey,SEAsiaKey, CFRIndKey, CFRChiKey, CHiDomKey };
-	for(int i = 0; i < NUMLINE; ++i)
-		draw[i] = tmp[i];
-	
 	height = width = cHeight = cWidth = 0; 
 	leftButtonPressed = false;
-	index_x = index_y = 0;
-
+	off_w = off_h = 0;
+	label[0] = "Korea";
+	label[1] = "CFR TaiWan";
+	label[2] = "SE Asia";
+	label[3] = "CFR India";
+	label[4] = "CFR China";
+	label[5] = "China Domestic";
 }
 
 Area4::~Area4()
@@ -36,13 +36,16 @@ void Area4::resizeGL(int width, int height)
 	this->height = height;
 	cWidth = width - DISFONT;
 	cHeight = height - DISFONT;
-	sSize = (cWidth >= cHeight) ? cHeight : cWidth;
+	sSize = (cWidth >= cHeight) ? cHeight : cWidth;//画布大小
+
+	off_w = (width - (sSize + DISFONT)) / 2 + DISFONT;
+	off_h = (height - (sSize + DISFONT)) / 2 + DISFONT;
 
 	glViewport(0,0,width,height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	glOrtho(0, width, 0, height, -10, 10.0);
+	glOrtho(0, width, height, 0, -10, 10.0);
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -72,22 +75,25 @@ void Area4::drawData()
 
 	if(!leftButtonPressed){
 		for(int i = 0; i < NUMLINE; ++i){
-			for(int j = 0; j < NUMLINE; ++j)
+			//数据归一化
+			double aver1;
+			double staDeviation1 = DataHelper::standardDeviation(dataArray, dataNum, draw_item[i], aver1);
+			for(int j = i; j < NUMLINE; ++j)
 			{
+				//数据归一化
+				double aver2;
+				double staDeviation2 = DataHelper::standardDeviation(dataArray, dataNum, draw_item[j], aver2);
+
 				glLoadIdentity();
-				glTranslatef(Point[i] + DISFONT, Point[j] + DISFONT, -5);//重置观察矩阵
+				glTranslatef(off_w + Point[i], off_h + Point[j], -5);//重置观察矩阵
 
 				//draw data
 				glPointSize(2);
 				glBegin(GL_POINTS);
 				for(int k = 0; k < dataNum; ++k){
-					glVertex2f(changeX(dataArray[k][draw[i]]), changeY(dataArray[k][draw[j]]));
+					glVertex2f(changeXY((dataArray[k][draw_item[i]] - aver1) / staDeviation1),
+						changeXY((dataArray[k][draw_item[j]] - aver2) / staDeviation2));
 				}
-				/*query.first();
-				do{
-					glVertex2f(changeX(query.value(i).toDouble()), changeY(query.value(j).toDouble()));
-				}while(query.next());*/
-
 				glEnd();
 			}
 		}
@@ -95,57 +101,57 @@ void Area4::drawData()
 	else
 	{
 		glLoadIdentity();
-		glTranslatef(DISFONT, DISFONT, -5);//重置观察矩阵
+		glTranslatef(off_w, off_h, -5);//重置观察矩阵
 
+		//数据归一化
+		double aver1;
+		double staDeviation1 = DataHelper::standardDeviation(dataArray, dataNum, draw_item[index_x], aver1);
+
+		double aver2;
+		double staDeviation2 = DataHelper::standardDeviation(dataArray, dataNum, draw_item[index_y], aver2);
 		//draw data
 		glPointSize(2);
 		glBegin(GL_POINTS);
 		for(int k = 0; k < dataNum; ++k){
-			glVertex2f(changeX(dataArray[k][draw[index_x]]), changeY(dataArray[k][draw[index_y]]));
+			glVertex2f(changeXY((dataArray[k][draw_item[index_x]] - aver1) / staDeviation1),
+				changeXY((dataArray[k][draw_item[index_y]] - aver2) / staDeviation2));
 		}
-		/*query.first();
-		do{
-			glVertex2f(changeX(query.value(i).toDouble()), changeY(query.value(j).toDouble()));
-		}while(query.next());*/
-
 		glEnd();
 	}
 }
-void Area4::readData()
-{
 
-}
-
-double Area4::changeY(double y)
+double Area4::changeXY(double tmp)
 {
-	return  (!leftButtonPressed) ? (y * (Offset - 1)) / 650 : (y * sSize) / 650;//(y * cHeight) / maxY;
-}
-
-double Area4::changeX(double x)
-{
-	return (!leftButtonPressed) ? (x * (Offset - 1)) / 650 : (x * sSize) / 650;
+	return  (!leftButtonPressed) ? (Offset - 1) * (tmp + 7 / 2) / 7 : sSize * (tmp + 7 / 2) / 7;
 }
 
 void Area4::drawLabel()
 {
 	//显示文字
 	QFont fontnew;
-	fontnew.setPointSize(10);
+	fontnew.setPointSize(8);
 	fontnew.setBold(true);
 	glColor3f(1.0,0.0,0.0);
-
-	for(int i = 0; i < NUMLINE; ++i){
-		renderText(Point[i], -15, -5, "data", fontnew);
-		renderText(-15, Point[NUMLINE - i] - 5, -5, "d", fontnew);
-		renderText(-15, Point[NUMLINE - i] - 12, -5, "a", fontnew);
-		renderText(-15, Point[NUMLINE - i] - 20, -5, "t", fontnew);
+	
+	if(!leftButtonPressed){
+		for(int i = 0; i < NUMLINE; i += 2){
+			renderText(Point[i], -15, -5, label[i], fontnew);
+		}
+		for(int i = 1; i < NUMLINE; i += 2){
+			renderText(-off_w, Point[i] + 30, -5, label[i], fontnew);
+		}
 	}
-
+	else
+	{
+		renderText(Point[NUMLINE / 2], -15, -5, label[index_x], fontnew);
+		renderText(-off_w, Point[NUMLINE / 2], -5, label[index_y], fontnew);
+	}
 }
+
 
 void Area4::initializeAxis()
 {
-	glTranslatef(DISFONT, DISFONT, -5.0);//move (0 , 0) to (disfont, disfont)
+	glTranslatef(off_w, off_h, -5.0);//move (0 , 0) to (disfont, disfont)
 	qglColor(Qt::black);
 	Offset = sSize / NUMLINE;
 
@@ -153,25 +159,33 @@ void Area4::initializeAxis()
 	for (int i = 0; i <= NUMLINE; ++i)
 	{
 		Point[i] = Offset * i;
-		//glBegin(GL_LINES);
-		//glVertex2f(0, Point[i]);
-		//glVertex2f(cWidth, Point[i]);
-		//glEnd();
 	}
 	
 	//draw relation color
-	for (int i = 0; i < NUMLINE; ++i)
+	for (int i = 0; i < NUMLINE; ++i){
 		for(int j = 0; j < NUMLINE; ++j)
 		{
-			double random = DataHelper::relation(dataArray, dataNum, draw[i], draw[j]);
+			double random = DataHelper::relation(dataArray, dataNum, draw_item[i], draw_item[j]);
 			color[i][j].r = random;
 			color[i][j].g = random;
 			color[i][j].b = random;
 		}
+	}
+
 	if(!leftButtonPressed){
-		for(int i = 0; i < NUMLINE; ++i){
-			for(int j = 0; j < NUMLINE; ++j){
-				drawSingleSquare(Offset * i, j * Offset, Offset - 1, color[i][j]);
+		for(int i = 0; i < NUMLINE; ++i){//第i列
+			for(int j = 0; j < NUMLINE; ++j){//第j行
+				if(j < i)
+					drawSingleSquare(Offset * i, j * Offset, Offset - 1, color[i][j]);
+				//画网格
+				glPointSize(1);
+				glColor3f(0,0,0);
+				glBegin(GL_LINE_LOOP);
+				glVertex2f(Offset * i, j * Offset);
+				glVertex2f(Offset * i + Offset - 1, j * Offset);
+				glVertex2f(Offset * i + Offset - 1, j * Offset + Offset - 1);
+				glVertex2f(Offset * i, j * Offset + Offset - 1);
+				glEnd();
 			}
 		}
 	}
@@ -179,18 +193,6 @@ void Area4::initializeAxis()
 	{
 		drawSingleSquare(0, 0, Offset * NUMLINE, color[index_x][index_y]);
 	}
-/*
-
-	//draw y axises
-
-	for (int i = 0; i <= NUMLINE; ++i)
-	{
-		Point[i] = Offset * i;
-		glBegin(GL_LINES);
-		glVertex2f(Point[i], 0);
-		glVertex2f(Point[i], cHeight);
-		glEnd();
-	}*/
 }
 
 void Area4::drawSingleSquare(int x, int y, int len, Color color)
@@ -210,12 +212,14 @@ void Area4::mousePressEvent(QMouseEvent *event)
 	if(event->button() == Qt::LeftButton)
 	{
 		//转换坐标
-		double x = event->x() - DISFONT;
-		double y = (height - event->y()) - DISFONT;
+		double x = event->x() - off_w;
+		double y = event->y() - off_h;
 		if(x < sSize && x > 0
 			&& y < sSize && y > 0){
-			index_x = x / Offset;
-			index_y = y / Offset;
+			if(!leftButtonPressed){
+				index_x = x / Offset;
+				index_y = y / Offset;
+			}
 			leftButtonPressed = !leftButtonPressed;
 			updateGL();
 		}

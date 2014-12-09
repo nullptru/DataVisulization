@@ -9,6 +9,7 @@
 #include <QString.h>
 #include "sqlHelper.h"
 const int NN=100;
+
 struct Time_methanol{
 	QString timess;
 	double methanol;

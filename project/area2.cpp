@@ -5,21 +5,11 @@
 Area2::Area2(QWidget *parent)
 	: QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
 {
-	xLabel[0] = "label1";
-	xLabel[1] = "label2";
-	xLabel[2] = "label3";
-	xLabelN = 3;
-
-	yLabel[0] = "120";
-	yLabel[1] = "240";
-	yLabel[2] = "360";
-	yLabel[3] = "480";
-	yLabel[4] = "600";
 	MaxY = 10;
-	yLabelN = 5;
-
-	/*****************************************/
-	query.exec("Select Date, Kor from data");
+	xLabelN = NumYear;
+	for(int i = 0; i < xLabelN; ++i){
+		xLabel[i] = QString::number(i + 2008);
+	}
 }
 
 
@@ -66,7 +56,7 @@ void Area2::paintGL()
 	initializeAxis();
 
 	//draw labels in x and y axises
-	//drawLabel();
+	drawLabel();
 
 	//draw data
 	drawData();
@@ -105,24 +95,30 @@ void Area2::drawData()
 		}
 		glBegin(GL_LINE_STRIP);
 		
-		for(int i = 1; i < dataNum; ++i)
+		for(int i = 0; i < dataNum; ++i)
 		{
 			glVertex2f(xPoint[(int)dataArray[i][Year] - 2008] + dataArray[i][Mon] * tinyxOffset,
 				changeY((dataArray[i][draw[j]] - aver) / staDeviation));
 
 		}
-		
+		if(draw[j] == TankPriKey && press_button1){
+			glColor3f(0, 0, 1);
+			for(int m = 0; m < 3; ++m){
+				glVertex2f(xPoint[(int)dataArray[dataNum - 1][Year] - 2008] + (dataArray[dataNum - 1][Mon] + m + 1) * tinyxOffset,
+					changeY((labelData[m] - aver) / staDeviation));
+			}
+		}
 		glEnd();
 	}
 }
 
 void Area2::initializeAxis()
 {
-	xOffset = cWidth / Num;
-	yOffset = (cHeight - DISFONT) / Num;
+	xOffset = cWidth / NumYear;
+	yOffset = (cHeight - DISFONT) / NumYear;
 	tinyxOffset = xOffset / 12;//each month
 
-	for(int i = 0; i < Num; ++i)
+	for(int i = 0; i < NumYear; ++i)
 		xPoint[i] = xOffset * i;
 	glBegin(GL_LINES);
 	glVertex2f(0, 0);
@@ -133,7 +129,7 @@ void Area2::initializeAxis()
 	glEnd();
 
 	//draw x point
-	for (int i = 1; i <= Num; ++i)
+	for (int i = 1; i <= NumYear; ++i)
 	{
 		glBegin(GL_LINES);
 		glVertex2f(0, yOffset * i);
@@ -142,11 +138,23 @@ void Area2::initializeAxis()
 	}
 
 	//draw y point
-	for (int i = 1; i <= Num; ++i)
+	for (int i = 1; i <= NumYear; ++i)
 	{
 		glBegin(GL_LINES);
 		glVertex2f(xPoint[i], 0);
 		glVertex2f(xPoint[i], DISFONT / 5);
 		glEnd();
+	}
+}
+
+void Area2::drawLabel(){
+	//ÏÔÊ¾ÎÄ×Ö
+	QFont fontnew;
+	fontnew.setPointSize(10);
+	fontnew.setBold(true);
+	glColor3f(1.0,0.0,0.0);
+
+	for(int i = 0; i < xLabelN; ++i){
+		renderText(xPoint[i] - 10, -15, -5, xLabel[i], fontnew);
 	}
 }

@@ -148,6 +148,7 @@ QString Project::getString( int n )
 }
 void Project::ExponentialSmo()
 {
+	press_button1 = true;
 	labelData[0]=labeldataSmo[0];
 	labelData[1]=labeldataSmo[1];
 	labelData[2]=labeldataSmo[2];

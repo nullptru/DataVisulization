@@ -33,22 +33,22 @@ protected:
 	void mousePressEvent(QMouseEvent *);
 private:
 	void initializeAxis();
-	double changeY(double y);
-	double changeX(double x);
+	double changeXY(double);
 	void drawLabel();
 	void drawData();
 
-	int *draw;
 	double width;//windows width
 	double height;
 	double cWidth;//canvas width
 	double cHeight;
 	double sSize;//the smaller part of cWidth and cHeight
 	double Point[NUMLINE + 1];
-	double Offset;
+	double Offset;//坐标系内坐标的偏移
 
-	int index_x;
-	int index_y;
+	double off_w;
+	double off_h;//画布的偏移，使画布居中
+
+	QString label[NUMLINE];
 	Color color[NUMLINE][NUMLINE];
 	bool leftButtonPressed;
 };

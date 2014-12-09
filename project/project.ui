@@ -279,10 +279,10 @@
    <widget class="Area2" name="area2" native="true">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>610</x>
       <y>30</y>
-      <width>391</width>
-      <height>231</height>
+      <width>511</width>
+      <height>181</height>
      </rect>
     </property>
    </widget>
@@ -291,8 +291,8 @@
      <rect>
       <x>310</x>
       <y>30</y>
-      <width>391</width>
-      <height>231</height>
+      <width>291</width>
+      <height>181</height>
      </rect>
     </property>
     <widget class="QSplitter" name="splitter2">
@@ -396,19 +396,19 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>290</y>
-      <width>401</width>
-      <height>311</height>
+      <y>220</y>
+      <width>291</width>
+      <height>381</height>
      </rect>
     </property>
    </widget>
    <widget class="Area4" name="area4" native="true">
     <property name="geometry">
      <rect>
-      <x>720</x>
-      <y>290</y>
-      <width>401</width>
-      <height>311</height>
+      <x>610</x>
+      <y>220</y>
+      <width>511</width>
+      <height>381</height>
      </rect>
     </property>
    </widget>

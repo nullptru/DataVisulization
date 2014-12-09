@@ -5,7 +5,6 @@
 #include <QGLWidget>
 #include "DataHelper.h"
 #include "para.h"
-const int Num = 7;
 
 class Area2 : public QGLWidget
 {
@@ -17,13 +16,14 @@ private:
 	void initializeAxis();
 	double changeY(double);
 	void drawData();
+	void drawLabel();
 
-	double xPoint[Num + 1];//x axis point
+	double xPoint[NumYear + 1];//x axis point
 	double xOffset;
 	double yOffset;
 	double tinyxOffset;
-	QString xLabel[Num + 1];
-	QString yLabel[Num + 1];
+	QString xLabel[NumYear + 1];
+	QString yLabel[NumYear + 1];
 	int xLabelN;
 	int yLabelN;
 	int width;//windows width
