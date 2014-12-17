@@ -75,7 +75,7 @@ double Area3::changeY(double y)
 
 void Area3::drawData()
 {	
-	glColor3f(1.0,0.0,0.0);
+	glColor3f(1.0,1.0,0.0);
 	glPointSize(2);
 
 	int tmp[] = {index_x, index_y};
@@ -145,7 +145,7 @@ void Area3::drawLabel(){
 	QFont fontnew;
 	fontnew.setPointSize(7);
 	fontnew.setBold(true);
-	glColor3f(1.0,0.0,0.0);
+	glColor3f(0.0,0.5,0.5);
 
 	for(int i = 0; i < xLabelN; ++i){
 		renderText(xPoint[i] - 10, -15, -5, xLabel[i], fontnew);

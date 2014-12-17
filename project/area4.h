@@ -5,6 +5,7 @@
 #include "sqlHelper.h"
 #include "DataHelper.h"
 #include "para.h"
+#include <qDebug.h>
 
 const int NUMLINE = 6;
 

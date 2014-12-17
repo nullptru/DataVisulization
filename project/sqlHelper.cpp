@@ -15,9 +15,9 @@ void SqlHelper::initial()
 {
 	db = QSqlDatabase::addDatabase("QMYSQL");
 	db.setHostName("localhost");	
-	db.setDatabaseName("project");
+	db.setDatabaseName("pro");
 	db.setUserName("root");
-	db.setPassword("123456");
+	db.setPassword("123");
 	if (!db.open())
 	{
 		succees = false;

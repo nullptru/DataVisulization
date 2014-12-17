@@ -71,7 +71,7 @@ void Area4::paintGL()
 
 void Area4::drawData()
 {
-	glColor3f(1, 0, 0);
+	glColor3f(1, 0.4, 0.6);
 
 	if(!leftButtonPressed){
 		for(int i = 0; i < NUMLINE; ++i){
@@ -131,7 +131,7 @@ void Area4::drawLabel()
 	QFont fontnew;
 	fontnew.setPointSize(8);
 	fontnew.setBold(true);
-	glColor3f(1.0,0.0,0.0);
+	glColor3f(0.0,0.5,0.5);
 	
 	if(!leftButtonPressed){
 		for(int i = 0; i < NUMLINE; i += 2){
@@ -166,9 +166,31 @@ void Area4::initializeAxis()
 		for(int j = 0; j < NUMLINE; ++j)
 		{
 			double random = DataHelper::relation(dataArray, dataNum, draw_item[i], draw_item[j]);
-			color[i][j].r = random;
+			if (random<0.25){
+				color[i][j].r = 180.0/255;
+				color[i][j].g = 140.0/255;
+				color[i][j].b = 251.0/255;
+			}
+			else if (random>0.25 && random<0.6){
+				color[i][j].r = 159.0/255;
+				color[i][j].g = 150.0/255;
+				color[i][j].b = 38.0/255;
+			}
+			else if (random>0.6 && random<0.75){
+				color[i][j].r = 6.0/255;
+				color[i][j].g = 46.0/255;
+				color[i][j].b = 183.0/255;
+			}
+			else{
+
+				color[i][j].r = 191.0/255;
+				color[i][j].g = 6.0/255;
+				color[i][j].b = 34.0/255;
+
+			}
+			/*color[i][j].r = random;
 			color[i][j].g = random;
-			color[i][j].b = random;
+			color[i][j].b = random;*/
 		}
 	}
 
