@@ -144,13 +144,13 @@ void Area3::initializeAxis()
 void Area3::drawLabel(){
 	//отй╬ндвж
 	QFont fontnew;
-	fontnew.setPointSize(7);
+	fontnew.setPointSize(13);
 	fontnew.setBold(true);
 
-	glColor3f(0.0,0.5,0.5);
+	glColor3f(1.0, 0.2, 0.3);
 
 	for(int i = 0; i < xLabelN; ++i){
-		renderText(xPoint[i] - 10, -15, -5, xLabel[i], fontnew);
+		renderText(xPoint[i] - 10, -20, -5, xLabel[i], fontnew);
 	}
 }
 

@@ -71,7 +71,7 @@ void Area4::paintGL()
 
 void Area4::drawData()
 {
-	glColor3f(1, 0.4, 0.6);
+	glColor3f(1.0, 1.0, 0.5);
 
 	if(!leftButtonPressed){
 		for(int i = 0; i < NUMLINE; ++i){
@@ -129,10 +129,10 @@ void Area4::drawLabel()
 {
 	//ÏÔÊ¾ÎÄ×Ö
 	QFont fontnew;
-	fontnew.setPointSize(8);
+	fontnew.setPointSize(13);
 	fontnew.setBold(true);
 
-	glColor3f(0.0,0.5,0.5);
+	glColor3f(1.0, 0.2, 0.3);
 	
 	if(!leftButtonPressed){
 		for(int i = 0; i < NUMLINE; i += 2){

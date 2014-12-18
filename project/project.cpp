@@ -4,6 +4,7 @@ Project::Project(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	ui.setupUi(this);
+	setWindowState(Qt::WindowMaximized);
 	//从数据库中读取甲醇时间和出罐价
 	query.exec("Select Date, TankPri from data");
 	setData();
