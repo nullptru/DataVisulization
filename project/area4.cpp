@@ -131,6 +131,7 @@ void Area4::drawLabel()
 	QFont fontnew;
 	fontnew.setPointSize(8);
 	fontnew.setBold(true);
+
 	glColor3f(0.0,0.5,0.5);
 	
 	if(!leftButtonPressed){
@@ -186,7 +187,6 @@ void Area4::initializeAxis()
 				color[i][j].r = 191.0/255;
 				color[i][j].g = 6.0/255;
 				color[i][j].b = 34.0/255;
-
 			}
 			/*color[i][j].r = random;
 			color[i][j].g = random;

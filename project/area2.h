@@ -13,6 +13,7 @@ public:
     explicit Area2(QWidget *parent = 0);
 	void getData(double[]);
 private:
+	void mouseMoveEvent(QMouseEvent *);
 	void initializeAxis();
 	double changeY(double);
 	void drawData();
@@ -31,6 +32,8 @@ private:
 	int cWidth;//canvas width
 	int cHeight;
 	int MaxY;
+
+	QString index_map_key;
 
 	QSqlQuery query;
 protected:

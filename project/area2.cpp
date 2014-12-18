@@ -1,14 +1,16 @@
 #include "area2.h"
 #include <QtOpenGL/QtOpenGL>
 #include <qdatetime.h>
+#include <qDebug>
 
 Area2::Area2(QWidget *parent)
 	: QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
 {
 	MaxY = 10;
+	setMouseTracking(true);  //激活整个窗体的鼠标追踪
 	xLabelN = NumYear;
 	for(int i = 0; i < xLabelN; ++i){
-		xLabel[i] = QString::number(i + 2008);
+		xLabel[i] = QString::number(i + INITIALYEAR);
 	}
 }
 
@@ -98,14 +100,14 @@ void Area2::drawData()
 		
 		for(int i = 0; i < dataNum; ++i)
 		{
-			glVertex2f(xPoint[(int)dataArray[i][Year] - 2008] + dataArray[i][Mon] * tinyxOffset,
+			glVertex2f(xPoint[(int)dataArray[i][Year] - INITIALYEAR] + dataArray[i][Mon] * tinyxOffset,
 				changeY((dataArray[i][draw[j]] - aver) / staDeviation));
 
 		}
 		if(draw[j] == TankPriKey && press_button1){
 			glColor3f(0, 0, 1);
 			for(int m = 0; m < 3; ++m){
-				glVertex2f(xPoint[(int)dataArray[dataNum - 1][Year] - 2008] + (dataArray[dataNum - 1][Mon] + m + 1) * tinyxOffset,
+				glVertex2f(xPoint[(int)dataArray[dataNum - 1][Year] - INITIALYEAR] + (dataArray[dataNum - 1][Mon] + m + 1) * tinyxOffset,
 					changeY((labelData[m] - aver) / staDeviation));
 			}
 		}
@@ -151,6 +153,8 @@ void Area2::initializeAxis()
 void Area2::drawLabel(){
 	//显示文字
 	QFont fontnew;
+
+	QFontMetrics fm(fontnew);
 	fontnew.setPointSize(10);
 	fontnew.setBold(true);
 	glColor3f(0.0,0.5,0.5);
@@ -158,4 +162,30 @@ void Area2::drawLabel(){
 	for(int i = 0; i < xLabelN; ++i){
 		renderText(xPoint[i] - 10, -15, -5, xLabel[i], fontnew);
 	}
+	
+	map<QString ,Emotion* >::iterator l_it = emotion_map.find(index_map_key);
+	if (l_it != emotion_map.end())
+	{
+		QString tmp = l_it->second->describe;
+		fontnew.setPointSize(8);
+		int wid = fm.width(tmp);
+		int hei = fm.height();
+		glBegin(GL_QUADS);//绘制矩形选框
+			glVertex2f(0, cHeight);
+			glVertex2f(wid, cHeight);
+			glVertex2f(wid, cHeight - hei);
+			glVertex2f(0, cHeight - hei);
+		glEnd();
+		glColor3f(0.8, 0.8, 0.8);
+		renderText(0,  cHeight + 2 - hei , -5, tmp , fontnew);
+	}
+}
+
+void Area2::mouseMoveEvent(QMouseEvent * event)
+{
+	double x = event->x() - DISFONT;
+	int tmp = x / tinyxOffset;
+	QString year = QString::number(tmp / 12 + INITIALYEAR);
+	QString month = (tmp % 12 < 10) ? ("0" + QString::number(tmp % 12 + 1)) : (QString::number(tmp % 12 + 1));
+	index_map_key = year + month;
 }
