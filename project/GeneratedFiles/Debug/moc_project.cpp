@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'project.h'
 **
-** Created: Sat Dec 20 22:12:16 2014
+** Created: Sun Dec 21 15:01:46 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Project[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,13 +35,17 @@ static const uint qt_meta_data_Project[] = {
       26,    8,    8,    8, 0x0a,
       38,    8,    8,    8, 0x0a,
       52,    8,    8,    8, 0x0a,
+      59,    8,    8,    8, 0x0a,
+      77,    8,    8,    8, 0x0a,
+      93,    8,    8,    8, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Project[] = {
     "Project\0\0ExponentialSmo()\0SeasonExp()\0"
-    "BpNeuralNet()\0Open()\0"
+    "BpNeuralNet()\0Open()\0changeExpertExp()\0"
+    "changeFactors()\0changeMental()\0"
 };
 
 const QMetaObject Project::staticMetaObject = {
@@ -77,9 +81,12 @@ int Project::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: SeasonExp(); break;
         case 2: BpNeuralNet(); break;
         case 3: Open(); break;
+        case 4: changeExpertExp(); break;
+        case 5: changeFactors(); break;
+        case 6: changeMental(); break;
         default: ;
         }
-        _id -= 4;
+        _id -= 7;
     }
     return _id;
 }

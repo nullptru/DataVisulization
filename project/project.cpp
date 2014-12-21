@@ -7,15 +7,9 @@ Project::Project(QWidget *parent, Qt::WFlags flags)
 	setWindowState(Qt::WindowMaximized);
 	//从数据库中读取甲醇时间和出罐价
 
-
-	//QWidget *qwid = new QWidget();		//ui.centralWidget
-	//qwid->resize(1000,2000);
 	query.exec("Select Date, TankPri from data");
 	setData();
 	createActions();
-
-	//textEdit = new QTextEdit;
-	//setCentralWidget(textEdit);
 }
 
 
@@ -28,6 +22,10 @@ void Project::createActions()
 	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(ExponentialSmo()));
 	QObject::connect(ui.pushButton_3,SIGNAL(clicked()),this,SLOT(SeasonExp()));
 	QObject::connect(ui.pushButton_4,SIGNAL(clicked()),this,SLOT(BpNeuralNet()));
+
+	QObject::connect(ui.verticalSlider_4,SIGNAL(valueChanged(int)),this,SLOT(changeExpertExp()));
+	QObject::connect(ui.verticalSlider_6,SIGNAL(valueChanged(int)),this,SLOT(changeFactors()));
+	QObject::connect(ui.verticalSlider_7,SIGNAL(valueChanged(int)),this,SLOT(changeMental()));
 	timer->start(10);
 
 }
@@ -43,9 +41,9 @@ void Project::setData()
 	labelData[1] = ui.label2_data->text().toDouble();
 	labelData[2] = ui.label3_data->text().toDouble();
 	ui.area2->getData(labelData);*/
-	labelData[0] = 100;
-	labelData[1] = 30;
-	labelData[2] = 50;
+	labelData[0] = 50;
+	labelData[1] = 300;
+	labelData[2] = 400;
 	int kk=0;
 	query.first();
 	do 
@@ -216,4 +214,22 @@ void Project::loadFile(const QString &fileName)
 	}
 
 	//setCurrentFile(fileName);
+}
+
+void Project::changeExpertExp()
+{
+	labeltemp[0]= ui.verticalSlider_4->value();
+	ui.label1_data->setText(QString::number(labelData[0]+labeltemp[0]+labeltemp[1]+labeltemp[2]));
+}
+
+void Project::changeFactors()
+{
+	labeltemp[1] = ui.verticalSlider_6->value();
+	ui.label1_data->setText(QString::number(labelData[0]+labeltemp[0]+labeltemp[1]+labeltemp[2]));
+}
+
+void Project::changeMental()
+{
+	labeltemp[2]= ui.verticalSlider_7->value();
+	ui.label1_data->setText(QString::number(labelData[0]+labeltemp[0]+labeltemp[1]+labeltemp[2]));
 }

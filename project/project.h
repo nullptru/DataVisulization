@@ -65,6 +65,10 @@ public slots:
 	void SeasonExp();
 	void BpNeuralNet();
 	void Open();
+
+	void changeExpertExp();
+	void changeFactors();
+	void changeMental();
 };
 
 #endif // PROJECT_H
