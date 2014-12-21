@@ -6,15 +6,30 @@ Project::Project(QWidget *parent, Qt::WFlags flags)
 	ui.setupUi(this);
 	setWindowState(Qt::WindowMaximized);
 	//从数据库中读取甲醇时间和出罐价
+
+
+	//QWidget *qwid = new QWidget();		//ui.centralWidget
+	//qwid->resize(1000,2000);
 	query.exec("Select Date, TankPri from data");
 	setData();
+	createActions();
+
+	//textEdit = new QTextEdit;
+	//setCentralWidget(textEdit);
+}
+
+
+void Project::createActions()
+{
 	timer = new QTimer(this);
 	connect(timer,SIGNAL(timeout()),ui.area2,SLOT(updateGL()));
 	connect(timer,SIGNAL(timeout()),ui.area3,SLOT(updateGL()));
+	QObject::connect(ui.actionopen,SIGNAL(triggered()),this,SLOT(Open()));
 	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(ExponentialSmo()));
 	QObject::connect(ui.pushButton_3,SIGNAL(clicked()),this,SLOT(SeasonExp()));
 	QObject::connect(ui.pushButton_4,SIGNAL(clicked()),this,SLOT(BpNeuralNet()));
 	timer->start(10);
+
 }
 
 Project::~Project()
@@ -173,4 +188,32 @@ void Project::WriteData()
 	ui.label1_data->setText(QString::number(labelData[0]));
 	ui.label2_data->setText(QString::number(labelData[1]));
 	ui.label3_data->setText(QString::number(labelData[2]));
+}
+
+void Project::Open()
+{
+	QString fileName = QFileDialog::getOpenFileName(this);
+	if (!fileName.isEmpty()){
+		loadFile(fileName);
+	}
+}
+void Project::loadFile(const QString &fileName)
+{
+	QFile file(fileName);
+	if (!file.open(QFile::ReadOnly | QFile::Text)) {
+		QMessageBox::warning(this, tr("Recent Files"),
+			tr("Cannot read file %1:\n%2.")
+			.arg(fileName)
+			.arg(file.errorString()));
+		return;
+	}
+
+	QTextStream infile(&file);
+	QString line = infile.readLine();
+	while(!line.isNull()){
+		line = infile.readLine();
+		qDebug()<<line;
+	}
+
+	//setCurrentFile(fileName);
 }

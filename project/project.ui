@@ -577,7 +577,7 @@
      <x>0</x>
      <y>0</y>
      <width>1193</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -604,6 +604,13 @@
     <addaction name="action32"/>
     <addaction name="action33"/>
    </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="actionopen"/>
+   </widget>
+   <addaction name="menu_4"/>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
    <addaction name="menu_3"/>
@@ -660,6 +667,11 @@
   <action name="action33">
    <property name="text">
     <string>GARCA + 指数平滑</string>
+   </property>
+  </action>
+  <action name="actionopen">
+   <property name="text">
+    <string>打开</string>
    </property>
   </action>
  </widget>

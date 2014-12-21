@@ -1,7 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'project.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created: Sat Dec 20 22:12:15 2014
+**      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -46,6 +47,7 @@ public:
     QAction *action31;
     QAction *action32;
     QAction *action33;
+    QAction *actionopen;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     Area4 *area4;
@@ -115,6 +117,7 @@ public:
     QMenu *menu;
     QMenu *menu_2;
     QMenu *menu_3;
+    QMenu *menu_4;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -141,6 +144,8 @@ public:
         action32->setObjectName(QString::fromUtf8("action32"));
         action33 = new QAction(ProjectClass);
         action33->setObjectName(QString::fromUtf8("action33"));
+        actionopen = new QAction(ProjectClass);
+        actionopen->setObjectName(QString::fromUtf8("actionopen"));
         centralWidget = new QWidget(ProjectClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -528,13 +533,15 @@ public:
         ProjectClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ProjectClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1193, 26));
+        menuBar->setGeometry(QRect(0, 0, 1193, 23));
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
         menu_2 = new QMenu(menuBar);
         menu_2->setObjectName(QString::fromUtf8("menu_2"));
         menu_3 = new QMenu(menuBar);
         menu_3->setObjectName(QString::fromUtf8("menu_3"));
+        menu_4 = new QMenu(menuBar);
+        menu_4->setObjectName(QString::fromUtf8("menu_4"));
         ProjectClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(ProjectClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -543,6 +550,7 @@ public:
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         ProjectClass->setStatusBar(statusBar);
 
+        menuBar->addAction(menu_4->menuAction());
         menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_2->menuAction());
         menuBar->addAction(menu_3->menuAction());
@@ -555,6 +563,7 @@ public:
         menu_3->addAction(action31);
         menu_3->addAction(action32);
         menu_3->addAction(action33);
+        menu_4->addAction(actionopen);
 
         retranslateUi(ProjectClass);
 
@@ -573,6 +582,7 @@ public:
         action31->setText(QApplication::translate("ProjectClass", "BP+\346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
         action32->setText(QApplication::translate("ProjectClass", "\345\260\217\346\263\242+\345\255\243\350\212\202\346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
         action33->setText(QApplication::translate("ProjectClass", "GARCA + \346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
+        actionopen->setText(QApplication::translate("ProjectClass", "\346\211\223\345\274\200", 0, QApplication::UnicodeUTF8));
         groupBox1->setTitle(QString());
         label_title1->setText(QApplication::translate("ProjectClass", "\345\215\225\345\217\230\351\207\217\351\242\204\346\265\213", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("ProjectClass", "\346\214\207\346\225\260\345\271\263\346\273\221\346\263\225", 0, QApplication::UnicodeUTF8));
@@ -620,6 +630,7 @@ public:
         menu->setTitle(QApplication::translate("ProjectClass", "\345\215\225\345\217\230\351\207\217\351\242\204\346\265\213", 0, QApplication::UnicodeUTF8));
         menu_2->setTitle(QApplication::translate("ProjectClass", "\345\233\240\347\264\240\351\242\204\346\265\213", 0, QApplication::UnicodeUTF8));
         menu_3->setTitle(QApplication::translate("ProjectClass", "\347\273\204\345\220\210\351\242\204\346\265\213\346\263\225", 0, QApplication::UnicodeUTF8));
+        menu_4->setTitle(QApplication::translate("ProjectClass", "\346\226\207\344\273\266", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
