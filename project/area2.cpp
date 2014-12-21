@@ -90,10 +90,10 @@ void Area2::drawData()
 		double staDeviation = DataHelper::standardDeviation(dataArray, dataNum, draw[j], aver);
 
 		if(draw[j] == TankPriKey){
-			glColor3f(1.0, 1.0, 0.5);
+			glColor3f(1.0, 0.0, 0.5);
 		}
 		else{
-			glColor3f(0.2, 0.2 ,0.6);
+			glColor3f(0.5, 0.7 ,0.6);
 		}
 		glBegin(GL_LINE_STRIP);
 		
@@ -154,7 +154,7 @@ void Area2::drawLabel(){
 	QFont fontnew;
 	fontnew.setPointSize(13);
 	fontnew.setBold(true);
-	glColor3f(1.0, 0.2, 0.3);
+	glColor3f(1.0, 0.3, 0.3);
 
 	for(int i = 0; i < xLabelN; ++i){
 		renderText(xPoint[i] - 10, -20, -5, xLabel[i], fontnew);
@@ -168,14 +168,14 @@ void Area2::drawLabel(){
 		QString tmp = l_it->second->describe;
 		int wid = fm.width(tmp);
 		int hei = fm.height();
-		glColor3f(0.7, 0.6 ,0.0);
+		glColor3f(1.0, 0.8 ,0.8);
 		glBegin(GL_QUADS);//»æÖÆ¾ØÐÎÑ¡¿ò
 			glVertex2f(0, cHeight);
 			glVertex2f(wid, cHeight);
 			glVertex2f(wid, cHeight - hei);
 			glVertex2f(0, cHeight - hei);
 		glEnd();
-		glColor3f(0, 0.3, 1.0);
+		glColor3f(0.1, 0.3, 1.0);
 		renderText(0,  cHeight - hei , 0, tmp , fontnew);
 	}
 }

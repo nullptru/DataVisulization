@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'project.ui'
 **
-** Created: Sun Dec 21 15:01:52 2014
+** Created: Sun Dec 21 20:35:46 2014
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -599,11 +599,11 @@ public:
         pushButton_8->setText(QApplication::translate("ProjectClass", "\345\260\217\346\263\242+\345\255\243\350\212\202\346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
         pushButton_9->setText(QApplication::translate("ProjectClass", "GARCA+\346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
         groupBox_4->setTitle(QString());
-        label_1->setText(QApplication::translate("ProjectClass", "TextLabel", 0, QApplication::UnicodeUTF8));
+        label_1->setText(QApplication::translate("ProjectClass", "\344\270\213\344\270\200\346\234\210", 0, QApplication::UnicodeUTF8));
         label1_data->setText(QApplication::translate("ProjectClass", "50", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("ProjectClass", "TextLabel", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("ProjectClass", "\344\270\213\344\272\214\346\234\210", 0, QApplication::UnicodeUTF8));
         label2_data->setText(QApplication::translate("ProjectClass", "300", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("ProjectClass", "TextLabel", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("ProjectClass", "\344\270\213\344\270\211\346\234\210", 0, QApplication::UnicodeUTF8));
         label3_data->setText(QApplication::translate("ProjectClass", "400", 0, QApplication::UnicodeUTF8));
         groupBox_5->setTitle(QString());
         groupBox->setTitle(QString());

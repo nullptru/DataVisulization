@@ -71,7 +71,7 @@ void Area4::paintGL()
 
 void Area4::drawData()
 {
-	glColor3f(1.0, 1.0, 0.5);
+	glColor3f(1.0, 0.5, 0.5);
 
 	if(!leftButtonPressed){
 		for(int i = 0; i < NUMLINE; ++i){
@@ -201,7 +201,7 @@ void Area4::initializeAxis()
 					drawSingleSquare(Offset * i, j * Offset, Offset - 1, color[i][j]);
 				//»­Íø¸ñ
 				glPointSize(1);
-				glColor3f(0,0,0);
+				glColor3f(0.5,0.5,0.5);
 				glBegin(GL_LINE_LOOP);
 				glVertex2f(Offset * i, j * Offset);
 				glVertex2f(Offset * i + Offset - 1, j * Offset);

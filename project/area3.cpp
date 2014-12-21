@@ -75,7 +75,7 @@ double Area3::changeY(double y)
 
 void Area3::drawData()
 {
-	glColor3f(1.0,1.0,0.0);
+	glColor3f(1.0,0.5,0.3);
 
 	glPointSize(2);
 
@@ -90,7 +90,7 @@ void Area3::drawData()
 		double staDeviation = DataHelper::standardDeviation(dataArray, dataNum, draw_item[tmp[i]], aver);
 
 		
-		glColor3f(1,0,0);
+		glColor3f(1.0,0.0,0.5);
 
 		glBegin(GL_LINE_STRIP);
 
@@ -147,7 +147,7 @@ void Area3::drawLabel(){
 	fontnew.setPointSize(13);
 	fontnew.setBold(true);
 
-	glColor3f(1.0, 0.2, 0.3);
+	glColor3f(1.0, 0.0, 0.3);
 
 	for(int i = 0; i < xLabelN; ++i){
 		renderText(xPoint[i] - 10, -20, -5, xLabel[i], fontnew);

@@ -268,7 +268,7 @@
                 <item>
                  <widget class="QLabel" name="label_1">
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>下一月</string>
                   </property>
                   <property name="textFormat">
                    <enum>Qt::PlainText</enum>
@@ -295,7 +295,7 @@
                 <item>
                  <widget class="QLabel" name="label_2">
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>下二月</string>
                   </property>
                   <property name="textFormat">
                    <enum>Qt::PlainText</enum>
@@ -322,7 +322,7 @@
                 <item>
                  <widget class="QLabel" name="label_3">
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>下三月</string>
                   </property>
                   <property name="textFormat">
                    <enum>Qt::PlainText</enum>

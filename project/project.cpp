@@ -22,7 +22,13 @@ void Project::createActions()
 	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(ExponentialSmo()));
 	QObject::connect(ui.pushButton_3,SIGNAL(clicked()),this,SLOT(SeasonExp()));
 	QObject::connect(ui.pushButton_4,SIGNAL(clicked()),this,SLOT(BpNeuralNet()));
-
+	ui.pushButton_2->setEnabled(false);
+	ui.pushButton_4->setEnabled(false);
+	ui.pushButton_5->setEnabled(false);
+	ui.pushButton_6->setEnabled(false);
+	ui.pushButton_7->setEnabled(false);
+	ui.pushButton_8->setEnabled(false);
+	ui.pushButton_9->setEnabled(false);
 	QObject::connect(ui.verticalSlider_4,SIGNAL(valueChanged(int)),this,SLOT(changeExpertExp()));
 	QObject::connect(ui.verticalSlider_6,SIGNAL(valueChanged(int)),this,SLOT(changeFactors()));
 	QObject::connect(ui.verticalSlider_7,SIGNAL(valueChanged(int)),this,SLOT(changeMental()));
