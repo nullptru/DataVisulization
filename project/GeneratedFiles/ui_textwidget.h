@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'textwidget.ui'
 **
-** Created: Tue Dec 23 15:40:04 2014
-**      by: Qt User Interface Compiler version 4.6.3
+** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/

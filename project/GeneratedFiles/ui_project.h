@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'project.ui'
 **
-** Created: Tue Dec 23 15:40:04 2014
-**      by: Qt User Interface Compiler version 4.6.3
+** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,7 +13,6 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
-#include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
@@ -25,6 +23,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QSlider>
 #include <QtGui/QStatusBar>
+#include <QtGui/QTabWidget>
 #include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -50,10 +49,11 @@ public:
     QAction *actionopen;
     QAction *actionclose;
     QWidget *centralWidget;
-    QGridLayout *gridLayout;
-    Area4 *area4;
-    Area2 *area2;
-    Area3 *area3;
+    QHBoxLayout *horizontalLayout_10;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QWidget *tab_2;
+    QHBoxLayout *horizontalLayout_13;
     Area1 *area1;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_4;
@@ -114,6 +114,14 @@ public:
     QLabel *label_17;
     QSlider *verticalSlider_7;
     QLabel *label_18;
+    QWidget *widget;
+    QWidget *tab_4;
+    QHBoxLayout *horizontalLayout_12;
+    Area2 *area2;
+    QWidget *tab_3;
+    QHBoxLayout *horizontalLayout_11;
+    Area3 *area3;
+    Area4 *area4;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -151,26 +159,28 @@ public:
         actionclose->setObjectName(QString::fromUtf8("actionclose"));
         centralWidget = new QWidget(ProjectClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        area4 = new Area4(centralWidget);
-        area4->setObjectName(QString::fromUtf8("area4"));
-
-        gridLayout->addWidget(area4, 1, 1, 1, 1);
-
-        area2 = new Area2(centralWidget);
-        area2->setObjectName(QString::fromUtf8("area2"));
-
-        gridLayout->addWidget(area2, 0, 1, 1, 1);
-
-        area3 = new Area3(centralWidget);
-        area3->setObjectName(QString::fromUtf8("area3"));
-
-        gridLayout->addWidget(area3, 1, 0, 1, 1);
-
-        area1 = new Area1(centralWidget);
+        horizontalLayout_10 = new QHBoxLayout(centralWidget);
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setLayoutDirection(Qt::LeftToRight);
+        tabWidget->setTabPosition(QTabWidget::West);
+        tabWidget->setTabShape(QTabWidget::Rounded);
+        tabWidget->setElideMode(Qt::ElideNone);
+        tabWidget->setDocumentMode(false);
+        tabWidget->setTabsClosable(false);
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        horizontalLayout_13 = new QHBoxLayout(tab_2);
+        horizontalLayout_13->setSpacing(6);
+        horizontalLayout_13->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        area1 = new Area1(tab_2);
         area1->setObjectName(QString::fromUtf8("area1"));
         horizontalLayout_2 = new QHBoxLayout(area1);
         horizontalLayout_2->setSpacing(6);
@@ -412,10 +422,10 @@ public:
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         label_8 = new QLabel(groupBox);
         label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setGeometry(QRect(10, 180, 72, 15));
+        label_8->setGeometry(QRect(0, 180, 72, 15));
         layoutWidget_2 = new QWidget(groupBox);
         layoutWidget_2->setObjectName(QString::fromUtf8("layoutWidget_2"));
-        layoutWidget_2->setGeometry(QRect(30, 10, 26, 161));
+        layoutWidget_2->setGeometry(QRect(20, 10, 26, 161));
         verticalLayout_7 = new QVBoxLayout(layoutWidget_2);
         verticalLayout_7->setSpacing(6);
         verticalLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -448,10 +458,10 @@ public:
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         label_11 = new QLabel(groupBox_2);
         label_11->setObjectName(QString::fromUtf8("label_11"));
-        label_11->setGeometry(QRect(10, 180, 72, 15));
+        label_11->setGeometry(QRect(0, 180, 72, 15));
         layoutWidget_3 = new QWidget(groupBox_2);
         layoutWidget_3->setObjectName(QString::fromUtf8("layoutWidget_3"));
-        layoutWidget_3->setGeometry(QRect(30, 10, 26, 161));
+        layoutWidget_3->setGeometry(QRect(20, 10, 31, 161));
         verticalLayout_9 = new QVBoxLayout(layoutWidget_3);
         verticalLayout_9->setSpacing(6);
         verticalLayout_9->setContentsMargins(11, 11, 11, 11);
@@ -525,18 +535,54 @@ public:
         horizontalLayout_2->addWidget(groupBox_4);
 
         horizontalLayout_2->setStretch(0, 1);
-        horizontalLayout_2->setStretch(1, 2);
+        horizontalLayout_2->setStretch(1, 1);
 
-        gridLayout->addWidget(area1, 0, 0, 1, 1);
+        horizontalLayout_13->addWidget(area1);
 
-        gridLayout->setRowStretch(0, 1);
-        gridLayout->setRowStretch(1, 1);
-        gridLayout->setColumnStretch(0, 1);
-        gridLayout->setColumnStretch(1, 1);
+        widget = new QWidget(tab_2);
+        widget->setObjectName(QString::fromUtf8("widget"));
+
+        horizontalLayout_13->addWidget(widget);
+
+        horizontalLayout_13->setStretch(0, 1);
+        horizontalLayout_13->setStretch(1, 1);
+        tabWidget->addTab(tab_2, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QString::fromUtf8("tab_4"));
+        horizontalLayout_12 = new QHBoxLayout(tab_4);
+        horizontalLayout_12->setSpacing(6);
+        horizontalLayout_12->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        area2 = new Area2(tab_4);
+        area2->setObjectName(QString::fromUtf8("area2"));
+
+        horizontalLayout_12->addWidget(area2);
+
+        tabWidget->addTab(tab_4, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        horizontalLayout_11 = new QHBoxLayout(tab_3);
+        horizontalLayout_11->setSpacing(6);
+        horizontalLayout_11->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        area3 = new Area3(tab_3);
+        area3->setObjectName(QString::fromUtf8("area3"));
+
+        horizontalLayout_11->addWidget(area3);
+
+        area4 = new Area4(tab_3);
+        area4->setObjectName(QString::fromUtf8("area4"));
+
+        horizontalLayout_11->addWidget(area4);
+
+        tabWidget->addTab(tab_3, QString());
+
+        horizontalLayout_10->addWidget(tabWidget);
+
         ProjectClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ProjectClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1193, 23));
+        menuBar->setGeometry(QRect(0, 0, 1193, 26));
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
         menu_2 = new QMenu(menuBar);
@@ -571,6 +617,9 @@ public:
 
         retranslateUi(ProjectClass);
 
+        tabWidget->setCurrentIndex(1);
+
+
         QMetaObject::connectSlotsByName(ProjectClass);
     } // setupUi
 
@@ -588,6 +637,7 @@ public:
         action33->setText(QApplication::translate("ProjectClass", "GARCA + \346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
         actionopen->setText(QApplication::translate("ProjectClass", "\346\211\223\345\274\200", 0, QApplication::UnicodeUTF8));
         actionclose->setText(QApplication::translate("ProjectClass", "\345\205\263\351\227\255", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("ProjectClass", "Tab 1", 0, QApplication::UnicodeUTF8));
         groupBox1->setTitle(QString());
         label_title1->setText(QApplication::translate("ProjectClass", "\345\215\225\345\217\230\351\207\217\351\242\204\346\265\213", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("ProjectClass", "\346\214\207\346\225\260\345\271\263\346\273\221\346\263\225", 0, QApplication::UnicodeUTF8));
@@ -632,6 +682,9 @@ public:
         verticalSlider_7->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
         label_18->setText(QApplication::translate("ProjectClass", "-10", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("ProjectClass", "Tab 2", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("ProjectClass", "\351\241\265", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ProjectClass", "\351\241\265", 0, QApplication::UnicodeUTF8));
         menu->setTitle(QApplication::translate("ProjectClass", "\345\215\225\345\217\230\351\207\217\351\242\204\346\265\213", 0, QApplication::UnicodeUTF8));
         menu_2->setTitle(QApplication::translate("ProjectClass", "\345\233\240\347\264\240\351\242\204\346\265\213", 0, QApplication::UnicodeUTF8));
         menu_3->setTitle(QApplication::translate("ProjectClass", "\347\273\204\345\220\210\351\242\204\346\265\213\346\263\225", 0, QApplication::UnicodeUTF8));
