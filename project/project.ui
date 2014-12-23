@@ -609,6 +609,7 @@
      <string>文件</string>
     </property>
     <addaction name="actionopen"/>
+    <addaction name="actionclose"/>
    </widget>
    <addaction name="menu_4"/>
    <addaction name="menu"/>
@@ -672,6 +673,11 @@
   <action name="actionopen">
    <property name="text">
     <string>打开</string>
+   </property>
+  </action>
+  <action name="actionclose">
+   <property name="text">
+    <string>关闭</string>
    </property>
   </action>
  </widget>

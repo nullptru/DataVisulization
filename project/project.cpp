@@ -6,7 +6,7 @@ Project::Project(QWidget *parent, Qt::WFlags flags)
 	ui.setupUi(this);
 	setWindowState(Qt::WindowMaximized);
 	//从数据库中读取甲醇时间和出罐价
-
+	
 	query.exec("Select Date, TankPri from data");
 	setData();
 	createActions();
@@ -19,6 +19,7 @@ void Project::createActions()
 	connect(timer,SIGNAL(timeout()),ui.area2,SLOT(updateGL()));
 	connect(timer,SIGNAL(timeout()),ui.area3,SLOT(updateGL()));
 	QObject::connect(ui.actionopen,SIGNAL(triggered()),this,SLOT(Open()));
+	QObject::connect(ui.actionclose,SIGNAL(triggered()),this,SLOT(close()));
 	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(ExponentialSmo()));
 	QObject::connect(ui.pushButton_3,SIGNAL(clicked()),this,SLOT(SeasonExp()));
 	QObject::connect(ui.pushButton_4,SIGNAL(clicked()),this,SLOT(BpNeuralNet()));
@@ -29,6 +30,13 @@ void Project::createActions()
 	ui.pushButton_7->setEnabled(false);
 	ui.pushButton_8->setEnabled(false);
 	ui.pushButton_9->setEnabled(false);
+	ui.action13->setEnabled(false);
+	ui.action21->setEnabled(false);
+	ui.action22->setEnabled(false);
+	ui.action23->setEnabled(false);
+	ui.action31->setEnabled(false);
+	ui.action32->setEnabled(false);
+	ui.action33->setEnabled(false);
 	QObject::connect(ui.verticalSlider_4,SIGNAL(valueChanged(int)),this,SLOT(changeExpertExp()));
 	QObject::connect(ui.verticalSlider_6,SIGNAL(valueChanged(int)),this,SLOT(changeFactors()));
 	QObject::connect(ui.verticalSlider_7,SIGNAL(valueChanged(int)),this,SLOT(changeMental()));
@@ -196,30 +204,35 @@ void Project::WriteData()
 
 void Project::Open()
 {
-	QString fileName = QFileDialog::getOpenFileName(this);
+	fileName = QFileDialog::getOpenFileName(this);
 	if (!fileName.isEmpty()){
 		loadFile(fileName);
 	}
+
 }
-void Project::loadFile(const QString &fileName)
+void Project::loadFile(const QString &fileName1)
 {
-	QFile file(fileName);
+	QFile file(fileName1);
 	if (!file.open(QFile::ReadOnly | QFile::Text)) {
 		QMessageBox::warning(this, tr("Recent Files"),
 			tr("Cannot read file %1:\n%2.")
-			.arg(fileName)
+			.arg(fileName1)
 			.arg(file.errorString()));
 		return;
 	}
-
+	textwid.move(100,100);
+	textwid.show();
+	textwid.writeData();
+	/*text = new QTextEdit(this);
+	setCentralWidget(text);
 	QTextStream infile(&file);
 	QString line = infile.readLine();
+	text->setGeometry(QRect(20,20,300,300));
 	while(!line.isNull()){
 		line = infile.readLine();
+	    text->append(line);
 		qDebug()<<line;
-	}
-
-	//setCurrentFile(fileName);
+	}*/
 }
 
 void Project::changeExpertExp()

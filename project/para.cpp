@@ -11,3 +11,4 @@ int draw_item[] = {KorKey, CFRTaiKey,SEAsiaKey, CFRIndKey, CFRChiKey, CHiDomKey 
 
 int press_button1 = false;
 map<QString, Emotion*> emotion_map;
+QString fileName = NULL;

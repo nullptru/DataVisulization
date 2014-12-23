@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'project.ui'
 **
-** Created: Sun Dec 21 20:35:46 2014
+** Created: Tue Dec 23 15:40:04 2014
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -48,6 +48,7 @@ public:
     QAction *action32;
     QAction *action33;
     QAction *actionopen;
+    QAction *actionclose;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     Area4 *area4;
@@ -146,6 +147,8 @@ public:
         action33->setObjectName(QString::fromUtf8("action33"));
         actionopen = new QAction(ProjectClass);
         actionopen->setObjectName(QString::fromUtf8("actionopen"));
+        actionclose = new QAction(ProjectClass);
+        actionclose->setObjectName(QString::fromUtf8("actionclose"));
         centralWidget = new QWidget(ProjectClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -564,6 +567,7 @@ public:
         menu_3->addAction(action32);
         menu_3->addAction(action33);
         menu_4->addAction(actionopen);
+        menu_4->addAction(actionclose);
 
         retranslateUi(ProjectClass);
 
@@ -583,6 +587,7 @@ public:
         action32->setText(QApplication::translate("ProjectClass", "\345\260\217\346\263\242+\345\255\243\350\212\202\346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
         action33->setText(QApplication::translate("ProjectClass", "GARCA + \346\214\207\346\225\260\345\271\263\346\273\221", 0, QApplication::UnicodeUTF8));
         actionopen->setText(QApplication::translate("ProjectClass", "\346\211\223\345\274\200", 0, QApplication::UnicodeUTF8));
+        actionclose->setText(QApplication::translate("ProjectClass", "\345\205\263\351\227\255", 0, QApplication::UnicodeUTF8));
         groupBox1->setTitle(QString());
         label_title1->setText(QApplication::translate("ProjectClass", "\345\215\225\345\217\230\351\207\217\351\242\204\346\265\213", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("ProjectClass", "\346\214\207\346\225\260\345\271\263\346\273\221\346\263\225", 0, QApplication::UnicodeUTF8));

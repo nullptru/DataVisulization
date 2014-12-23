@@ -60,5 +60,5 @@ extern int index_y;
 extern map<QString,Emotion *> emotion_map;
 extern int draw_item[];//area3 和 area4需要画的数据
 extern int press_button1;
-
+extern QString fileName;
 #endif

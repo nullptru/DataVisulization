@@ -11,12 +11,12 @@
 #include "sqlHelper.h"
 #include <QDebug>
 #include <qfiledialog.h>
-//#include <qtextedit.h>
+#include <textwidget.h>
 #include <qmdiarea.h>
 #include <qmdisubwindow.h>
 #include <qlist.h>
-#include <qmdiarea.h>
 #include <qtextstream.h>
+#include <QTextEdit>
 const int NN=100;
 
 struct Time_methanol{
@@ -58,8 +58,8 @@ private:
 	void loadFile(const QString &fileName);
 
 	QString curFile;
-	QMdiArea *mdiarea;
-	QWidget *qwidget;
+	textwidget textwid;
+	QTextEdit *text;
 public slots:
 	void ExponentialSmo();
 	void SeasonExp();

@@ -188,10 +188,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\mdichild.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\para.cpp"
 				>
 			</File>
@@ -201,6 +197,10 @@
 			</File>
 			<File
 				RelativePath=".\sqlHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\textwidget.cpp"
 				>
 			</File>
 		</Filter>
@@ -318,32 +318,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\mdichild.h"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing mdichild.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -D -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtSql\.&quot; -I&quot;$(QTDIR)\include\QtOpenGL\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; &quot;.\mdichild.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_mdichild.cpp&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\mdichild.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_mdichild.cpp&quot;"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing mdichild.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -D -DUNICODE -DWIN32 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtSql\.&quot; -I&quot;$(QTDIR)\include\QtOpenGL\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; &quot;.\mdichild.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_mdichild.cpp&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\mdichild.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_mdichild.cpp&quot;"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\para.h"
 				>
 			</File>
@@ -377,6 +351,32 @@
 				RelativePath=".\sqlHelper.h"
 				>
 			</File>
+			<File
+				RelativePath=".\textwidget.h"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing textwidget.h..."
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -D -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtSql\.&quot; -I&quot;$(QTDIR)\include\QtOpenGL\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; &quot;.\textwidget.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_textwidget.cpp&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\textwidget.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_textwidget.cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing textwidget.h..."
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -D -DUNICODE -DWIN32 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtSql\.&quot; -I&quot;$(QTDIR)\include\QtOpenGL\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; &quot;.\textwidget.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_textwidget.cpp&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\textwidget.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_textwidget.cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<Filter
 			Name="Form Files"
@@ -406,6 +406,32 @@
 						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_$(InputName).h&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\textwidget.ui"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputPath)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_textwidget.h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;.\GeneratedFiles\ui_textwidget.h&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputPath)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_textwidget.h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;.\GeneratedFiles\ui_textwidget.h&quot;"
 					/>
 				</FileConfiguration>
 			</File>
@@ -450,7 +476,7 @@
 			SourceControlFiles="false"
 			>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_mdichild.cpp"
+				RelativePath=".\GeneratedFiles\Debug\moc_textwidget.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -469,7 +495,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_mdichild.cpp"
+				RelativePath=".\GeneratedFiles\Release\moc_textwidget.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -509,6 +535,10 @@
 			</File>
 			<File
 				RelativePath=".\GeneratedFiles\ui_project.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GeneratedFiles\ui_textwidget.h"
 				>
 			</File>
 			<Filter
