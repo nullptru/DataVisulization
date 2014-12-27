@@ -4,14 +4,59 @@ Project::Project(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	ui.setupUi(this);
-	setWindowState(Qt::WindowMaximized);
+	//setWindowState(Qt::WindowMaximized);
 	//从数据库中读取甲醇时间和出罐价
 	
 	query.exec("Select Date, TankPri from data");
 	setData();
+	settable();
 	createActions();
 }
+Project::~Project()
+{
 
+
+}
+void Project::settable()
+{
+	tab = new QTableWidget(ui.tab2);
+	tab->setRowCount(row);
+	tab->setColumnCount(col);
+	tab->setGeometry (10,10,500,500);
+	//设置横标签
+	QColor color;
+	QStringList headerLabels;
+	headerLabels<<"甲醇出罐价"<<"C2";
+
+	tab->setHorizontalHeaderLabels(headerLabels);
+	tab->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
+	//设置纵标签
+	QStringList rowLabels;
+	for (int i=0; i<row; i++)
+	{
+			rowLabels<<time_methanol[i].timess;
+	}
+	tab->setVerticalHeaderLabels(rowLabels);
+	tab->setSelectionBehavior(QAbstractItemView::SelectItems);
+	//设置编辑方式
+	tab->setEditTriggers(QAbstractItemView::DoubleClicked);
+	//设置表格内容
+	for (int i=0; i<len_methanol;i++)
+	{
+		QTableWidgetItem *item0, *item1;
+		item0 = new QTableWidgetItem;
+		item1 = new QTableWidgetItem;
+
+		QString txt = QString("%1").arg(time_methanol[i].methanol);
+		item0->setText(txt);
+		item0->setBackgroundColor(Qt::gray);
+		tab->setItem(i, 0,item0);
+		
+		txt =QString("%1").arg((i+1)*2);
+		item1->setText(txt);
+		tab->setItem(i, 1,item1);
+	}
+}
 
 void Project::createActions()
 {
@@ -40,15 +85,11 @@ void Project::createActions()
 	QObject::connect(ui.verticalSlider_4,SIGNAL(valueChanged(int)),this,SLOT(changeExpertExp()));
 	QObject::connect(ui.verticalSlider_6,SIGNAL(valueChanged(int)),this,SLOT(changeFactors()));
 	QObject::connect(ui.verticalSlider_7,SIGNAL(valueChanged(int)),this,SLOT(changeMental()));
+	//表格项的添加
+	QObject::connect(ui.pushButtonadd1,SIGNAL(clicked()),this,SLOT(addTableItem()));
 	timer->start(10);
 
 }
-
-Project::~Project()
-{
-	
-}
-
 void Project::setData()
 {
 	/*labelData[0] = ui.label1_data->text().toDouble();
@@ -251,4 +292,20 @@ void Project::changeMental()
 {
 	labeltemp[2]= ui.verticalSlider_7->value();
 	ui.label1_data->setText(QString::number(labelData[0]+labeltemp[0]+labeltemp[1]+labeltemp[2]));
+}
+
+void Project::addTableItem()
+{
+		QTableWidgetItem *item0, *item1;
+		item0 = new QTableWidgetItem;
+		item1 = new QTableWidgetItem;
+		QString a1 = ui.lineEditadd1->text();
+		QString txt = QString("%1").arg(a1);
+		item0->setText(txt);
+		//item0->setBackgroundColor(Qt::gray);
+		tab->setItem(len_methanol, 0,item0);
+
+		txt =QString("%1").arg(len_methanol+1);
+		item1->setText(txt);
+		tab->setItem(len_methanol, 1,item1);
 }

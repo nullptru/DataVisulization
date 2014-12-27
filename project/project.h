@@ -17,6 +17,7 @@
 #include <qlist.h>
 #include <qtextstream.h>
 #include <QTextEdit>
+#include <QTableWidget>
 const int NN=100;
 
 struct Time_methanol{
@@ -69,6 +70,12 @@ public slots:
 	void changeExpertExp();
 	void changeFactors();
 	void changeMental();
+
+	void addTableItem();
+public:
+	void settable();
+	enum {row = 100,col= 2};
+	QTableWidget *tab;
 };
 
 #endif // PROJECT_H
