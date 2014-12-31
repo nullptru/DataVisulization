@@ -12,13 +12,15 @@
 #include <QDebug>
 #include <qfiledialog.h>
 #include <textwidget.h>
+#include <onetext.h>
 #include <qmdiarea.h>
 #include <qmdisubwindow.h>
 #include <qlist.h>
 #include <qtextstream.h>
 #include <QTextEdit>
 #include <QTableWidget>
-const int NN=100;
+const int NN = 100;
+const int CHOOSE = 9;
 
 struct Time_methanol{
 	QString timess;
@@ -43,6 +45,8 @@ public:
 	double labeldataSeason[3];
 	double labedataBp[3];
 
+	QString choose[CHOOSE];
+	int indexChoose;
 private:
 	Ui::ProjectClass ui;
 	QSqlQuery query;
@@ -60,22 +64,29 @@ private:
 
 	QString curFile;
 	textwidget textwid;
+	onetext addonetext;
 	QTextEdit *text;
 public slots:
+	void chooseFunction();
 	void ExponentialSmo();
 	void SeasonExp();
 	void BpNeuralNet();
 	void Open();
+	void addItem();
+	void openChoice();
 
-	void changeExpertExp();
 	void changeFactors();
-	void changeMental();
+	void changeFactorsType(const QString & txt);
+    void futureTrend();
 
 	void addTableItem();
+	void cboSelect();
+	void cboSel(const QString &txt);
 public:
 	void settable();
 	enum {row = 100,col= 2};
 	QTableWidget *tab;
+
 };
 
 #endif // PROJECT_H

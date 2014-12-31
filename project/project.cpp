@@ -14,15 +14,13 @@ Project::Project(QWidget *parent, Qt::WFlags flags)
 }
 Project::~Project()
 {
-
-
 }
 void Project::settable()
 {
 	tab = new QTableWidget(ui.tab2);
 	tab->setRowCount(row);
 	tab->setColumnCount(col);
-	tab->setGeometry (10,10,500,500);
+	tab->setGeometry (10,60,500,500);
 	//设置横标签
 	QColor color;
 	QStringList headerLabels;
@@ -57,36 +55,26 @@ void Project::settable()
 		tab->setItem(i, 1,item1);
 	}
 }
-
 void Project::createActions()
 {
 	timer = new QTimer(this);
 	connect(timer,SIGNAL(timeout()),ui.area2,SLOT(updateGL()));
 	connect(timer,SIGNAL(timeout()),ui.area3,SLOT(updateGL()));
-	QObject::connect(ui.actionopen,SIGNAL(triggered()),this,SLOT(Open()));
-	QObject::connect(ui.actionclose,SIGNAL(triggered()),this,SLOT(close()));
-	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(ExponentialSmo()));
-	QObject::connect(ui.pushButton_3,SIGNAL(clicked()),this,SLOT(SeasonExp()));
-	QObject::connect(ui.pushButton_4,SIGNAL(clicked()),this,SLOT(BpNeuralNet()));
-	ui.pushButton_2->setEnabled(false);
-	ui.pushButton_4->setEnabled(false);
-	ui.pushButton_5->setEnabled(false);
-	ui.pushButton_6->setEnabled(false);
-	ui.pushButton_7->setEnabled(false);
-	ui.pushButton_8->setEnabled(false);
-	ui.pushButton_9->setEnabled(false);
-	ui.action13->setEnabled(false);
-	ui.action21->setEnabled(false);
-	ui.action22->setEnabled(false);
-	ui.action23->setEnabled(false);
-	ui.action31->setEnabled(false);
-	ui.action32->setEnabled(false);
-	ui.action33->setEnabled(false);
-	QObject::connect(ui.verticalSlider_4,SIGNAL(valueChanged(int)),this,SLOT(changeExpertExp()));
-	QObject::connect(ui.verticalSlider_6,SIGNAL(valueChanged(int)),this,SLOT(changeFactors()));
-	QObject::connect(ui.verticalSlider_7,SIGNAL(valueChanged(int)),this,SLOT(changeMental()));
+	//文件打开
+	QObject::connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(openChoice()));
+	//方法选择
+	QObject::connect(ui.pushButton_12,SIGNAL(clicked()),this,SLOT(chooseFunction()));
+	//影响因素
+	QObject::connect(ui.pushButton1,SIGNAL(clicked()),this,SLOT(changeFactors()));
+	QObject::connect(ui.comboBox_3,SIGNAL(currentIndexChanged(const QString &)),this,SLOT(changeFactorsType(const QString &)));
+	//未来趋势
+	QObject::connect(ui.pushButton4,SIGNAL(clicked()),this,SLOT(futureTrend()));
 	//表格项的添加
 	QObject::connect(ui.pushButtonadd1,SIGNAL(clicked()),this,SLOT(addTableItem()));
+	//combobox添加
+	QObject::connect(ui.comboBox,SIGNAL(currentIndexChanged(const QString &)),this,SLOT(cboSel(const QString &)));
+	QObject::connect(ui.pushButton_12,SIGNAL(clicked()),this,SLOT(cboSelect()));
+	//
 	timer->start(10);
 
 }
@@ -96,6 +84,15 @@ void Project::setData()
 	labelData[1] = ui.label2_data->text().toDouble();
 	labelData[2] = ui.label3_data->text().toDouble();
 	ui.area2->getData(labelData);*/
+	choose[0]= "指数平滑法";
+	choose[1]= "季节指数法";
+	choose[2]= "ARMA法";
+	choose[3]= "Bp神经网络";
+	choose[4]= "小波神经网络";
+	choose[5]= "GARCH模型";
+	choose[6]= "Bp+指数平滑";
+	choose[7]= "小波+季节指数平滑";
+	choose[8]= "GARCH+指数平滑";
 	labelData[0] = 50;
 	labelData[1] = 300;
 	labelData[2] = 400;
@@ -120,6 +117,16 @@ void Project::setData()
 	//bp神经网络
 	//BpNe();
 }
+
+
+void Project::chooseFunction()
+{
+	if (indexChoose==0){
+		ExponentialSmo();
+	}else if (indexChoose==1){
+		SeasonExp();
+	}
+}
 void Project::Exponent()
 {
 	double a = 0.4;
@@ -141,6 +148,19 @@ void Project::Exponent()
 	labeldataSmo[2] = a1+3*b1+3*c1;
 }
 
+void Project::openChoice()
+{
+	QString str;
+	str = ui.comboBox_5->currentText();
+	if ((QString::compare(str,"打开")) == 0)
+	{
+		Open();
+	}
+	if ((QString::compare(str,"添加一条记录")) == 0)
+	{
+		addItem();
+	}
+}
 void Project::Season()
 {
 	Time_methanol year_methanol[NN];
@@ -205,15 +225,12 @@ void Project::Season()
 
 void Project::BpNe()
 {
-
 }
 
 QString Project::getString( int n )
 {
 	QString str = QString::number(n,10);
 	return str;
-
-
 }
 void Project::ExponentialSmo()
 {
@@ -235,12 +252,14 @@ void Project::SeasonExp()
 void Project::BpNeuralNet()
 {
 }
-
 void Project::WriteData()
 {
 	ui.label1_data->setText(QString::number(labelData[0]));
 	ui.label2_data->setText(QString::number(labelData[1]));
 	ui.label3_data->setText(QString::number(labelData[2]));
+	ui.label4_data->setText(QString::number(labelData[0]));
+	ui.label5_data->setText(QString::number(labelData[1]));
+	ui.label6_data->setText(QString::number(labelData[2]));
 }
 
 void Project::Open()
@@ -276,24 +295,50 @@ void Project::loadFile(const QString &fileName1)
 	}*/
 }
 
-void Project::changeExpertExp()
+void Project::addItem()
 {
-	labeltemp[0]= ui.verticalSlider_4->value();
-	ui.label1_data->setText(QString::number(labelData[0]+labeltemp[0]+labeltemp[1]+labeltemp[2]));
+	addonetext.show();
 }
-
 void Project::changeFactors()
 {
-	labeltemp[1] = ui.verticalSlider_6->value();
-	ui.label1_data->setText(QString::number(labelData[0]+labeltemp[0]+labeltemp[1]+labeltemp[2]));
+	int labeltemp= ui.horizontalSlider1->value();
+	ui.label1_data->setText(QString::number(labelData[0]+labeltemp));
 }
-
-void Project::changeMental()
+void Project::changeFactorsType( const QString & txt )
 {
-	labeltemp[2]= ui.verticalSlider_7->value();
-	ui.label1_data->setText(QString::number(labelData[0]+labeltemp[0]+labeltemp[1]+labeltemp[2]));
+	QString str = txt;
+	qDebug()<<txt;
 }
-
+void Project::futureTrend()
+{
+	QString str;
+	str = ui.comboBox_4->currentText();
+	double labeltemp1,labeltemp2;
+	if((QString::compare(str,"一直上涨"))==0)
+	{
+		labeltemp1 = labelData[1]+30;
+		labeltemp2 = labelData[2]+30; 
+		ui.label2_data->setText(QString::number(labeltemp1));
+		ui.label3_data->setText(QString::number(labeltemp2));
+	}else if ((QString::compare(str,"先涨后跌"))==0)
+	{
+		labeltemp1 = labelData[1]+30;
+		labeltemp2 = labelData[2]-30; 
+		ui.label2_data->setText(QString::number(labeltemp1));
+		ui.label3_data->setText(QString::number(labeltemp2));
+	}else if((QString::compare(str,"一直下跌"))==0)
+	{
+		labeltemp1 = labelData[1]-30;
+		labeltemp2 = labelData[2]-30; 
+		ui.label2_data->setText(QString::number(labeltemp1));
+		ui.label3_data->setText(QString::number(labeltemp2));
+	}else{
+		labeltemp1 = labelData[1]-30;
+		labeltemp2 = labelData[2]+30; 
+		ui.label2_data->setText(QString::number(labeltemp1));
+		ui.label3_data->setText(QString::number(labeltemp2));
+	}
+}
 void Project::addTableItem()
 {
 		QTableWidgetItem *item0, *item1;
@@ -308,4 +353,39 @@ void Project::addTableItem()
 		txt =QString("%1").arg(len_methanol+1);
 		item1->setText(txt);
 		tab->setItem(len_methanol, 1,item1);
+}
+
+void Project::cboSelect()
+{
+	QString str ;
+	str = ui.comboBox_2->currentText();
+	for (int i =0;i<CHOOSE;i++)
+		if ((QString::compare(str,choose[i]))==0)
+		{	indexChoose = i;
+			break;
+		}
+	qDebug()<<str<<indexChoose;
+}
+
+void Project::cboSel( const QString & txt)
+{
+	QString str = txt;
+	qDebug()<<str;
+	ui.comboBox_2->clear();
+	if ((QString::compare(str,"单变量预测"))==0)
+	{
+		ui.comboBox_2->addItem(QWidget::tr("指数平滑"));
+		ui.comboBox_2->addItem(QWidget::tr("季节指数法"));
+		ui.comboBox_2->addItem(QWidget::tr("ARMA法"));
+	}else if ((QString::compare(str,"因素预测"))==0)
+	{
+		ui.comboBox_2->addItem(QWidget::tr("Bp神经网络"));
+		ui.comboBox_2->addItem(QWidget::tr("小波神经网络"));
+		ui.comboBox_2->addItem(QWidget::tr("GARCH模型"));
+	}else{
+		ui.comboBox_2->addItem(QWidget::tr("Bp+指数平滑"));
+		ui.comboBox_2->addItem(QWidget::tr("小波+季节指数平滑"));
+		ui.comboBox_2->addItem(QWidget::tr("GARCH+指数平滑"));
+	}
+
 }

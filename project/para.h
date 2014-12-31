@@ -2,6 +2,7 @@
 #define PARA_H
 #include <map>
 #include <QString>
+#include <QVector>
 using std::map;
 using std::pair;
 struct Emotion
@@ -49,7 +50,6 @@ const int NumYear = 7;//for area2 and area3
 const int INITIALYEAR = 2008;
 
 extern double labelData[3];//三个label变量
-extern double labeltemp[3];
 extern double dataArray[MAXDATA][MAXDATACOL];
 extern int DISFONT;//font size
 extern int dataNum;
